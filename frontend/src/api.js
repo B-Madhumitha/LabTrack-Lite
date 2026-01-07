@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5284";
+const API_BASE = "https://labtrack-lite-backend-2026.onrender.com";
 
 export async function getAssets(role) {
   const res = await fetch(`${API_BASE}/assets`, {
