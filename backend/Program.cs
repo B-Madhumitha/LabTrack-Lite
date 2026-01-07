@@ -161,4 +161,6 @@ app.MapPost("/tickets/{id}/comments", async (
     return Results.Created($"/tickets/{id}/comments/{comment.Id}", comment);
 });
 
+app.MapGet("/healthz", () => "OK");
+
 app.Run();
