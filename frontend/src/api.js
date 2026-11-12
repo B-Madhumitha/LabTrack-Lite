@@ -34,3 +34,21 @@ export async function createTicket(ticket, role) {
 
   return res.json();
 }
+
+export async function createAsset(asset, role) {
+  const res = await fetch(`${API_BASE}/assets`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-User-Role": role
+    },
+    body: JSON.stringify(asset)
+  });
+
+  if (!res.ok) {
+    const error = await res.text();
+    throw new Error(`Failed to create asset: ${res.status} ${error}`);
+  }
+
+  return res.json();
+}

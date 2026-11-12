@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAssets, getTickets, createTicket } from "./api";
+import { getAssets, getTickets, createTicket, createAsset } from "./api";
 
 function App() {
   // --------------------
@@ -48,27 +48,32 @@ function App() {
   // --------------------
   // Create Asset (Admin)
   // --------------------
-  async function handleCreateAsset(e) {
-    e.preventDefault();
+  
+async function handleCreateAsset(e) {
+  e.preventDefault();
 
-    await fetch("http://localhost:5284/assets", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-User-Role": role
-      },
-      body: JSON.stringify({
+  try {
+    await createAsset(
+      {
         name: assetName,
         category: assetCategory,
         status: assetStatus
-      })
-    });
+      },
+      role
+    );
 
     setAssetName("");
     setAssetCategory("");
     setAssetStatus("Available");
-    refreshData();
+
+    await refreshData();
+
+    alert("Asset created successfully!");
+  } catch (error) {
+    console.error("Asset creation failed:", error);
+    alert(error.message);
   }
+}
 
   // --------------------
   // Create Ticket (Engineer)
