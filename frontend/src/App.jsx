@@ -101,19 +101,15 @@ async function handleCreateAsset(e) {
   // Update Ticket Status (Technician)
   // --------------------
   async function updateStatus(id, newStatus) {
-    await fetch(
-      `http://localhost:5284/tickets/${id}/status?newStatus=${newStatus}`,
-      {
-        method: "PATCH",
-        headers: {
-          "X-User-Role": role
-        }
-      }
-    );
-
-    refreshData();
+  try {
+    await updateTicketStatus(id, newStatus, role);
+    await refreshData();
+    alert("Ticket status updated successfully!");
+  } catch (error) {
+    console.error("Ticket update failed:", error);
+    alert(error.message);
   }
-
+}
   // --------------------
   // Chatbot logic
   // --------------------
