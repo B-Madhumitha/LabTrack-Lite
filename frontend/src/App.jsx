@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAssets, getTickets, createTicket, createAsset } from "./api";
+import { getAssets, getTickets, createTicket, createAsset, updateTicketStatus } from "./api";
 
 function App() {
   // --------------------
