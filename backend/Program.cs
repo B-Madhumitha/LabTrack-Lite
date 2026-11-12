@@ -14,12 +14,14 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy
-                .WithOrigins("http://localhost:5173")
+                .WithOrigins(
+                    "http://localhost:5173",
+                    "https://labtrackliteproject.netlify.app"
+                )
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
 });
-
 // SQLite DbContext
 builder.Services.AddDbContext<LabTrackDbContext>(options =>
     options.UseSqlite("Data Source=labtrack.db"));
